@@ -439,7 +439,7 @@ a { color: inherit; text-decoration: none; }
 
 .amenidades-section {
   padding: 4rem 1.25rem;
-  background-color: #f9f9f9; /* Ajusta al color de fondo secundario de tu sitio */
+  background-color: #f0f4f8;
 }
 
 .amenidades-container {
@@ -447,7 +447,6 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
 }
 
-/* Encabezado de la sección */
 .amenidades-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -456,90 +455,59 @@ a { color: inherit; text-decoration: none; }
 .amenidades-titulo {
   font-size: 2rem;
   font-weight: 700;
-  color: #1a1a1a; /* Reemplaza con tu variable de color principal */
   margin: 0 0 0.5rem;
 }
 
 .amenidades-subtitulo {
   font-size: 1rem;
-  color: #666; /* Reemplaza con tu variable de color secundario */
+  opacity: 0.7;
   margin: 0;
 }
 
-/* Grid de tarjetas — Mobile First: 1 columna base */
 .amenidades-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
-/* Tarjeta individual */
 .amenidad-card {
   background-color: #ffffff;
-  border-radius: 16px; /* Usa el mismo border-radius de tu sitio */
-  padding: 1.5rem;
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  /* Sombra suave, quítala si no combina con tu estética */
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 0.5rem;
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
 
-.amenidad-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-/* Contenedor del ícono */
 .amenidad-icono {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background-color: #eef4ff; /* Ajusta al color de acento de tu sitio */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem; /* Para íconos SVG o emoji */
+  font-size: 2rem;
+  line-height: 1;
 }
 
-.amenidad-icono img {
-  width: 24px;
-  height: 24px;
-}
-
-/* Nombre y descripción */
 .amenidad-nombre {
   font-size: 1rem;
   font-weight: 600;
-  color: #1a1a1a;
   margin: 0;
 }
 
 .amenidad-desc {
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 0.875rem;
+  opacity: 0.65;
   margin: 0;
   line-height: 1.6;
 }
 
-/* ——— Breakpoints responsivos ——— */
-
-/* Tablet: 2 columnas */
 @media (min-width: 600px) {
   .amenidades-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Desktop: 3 columnas */
 @media (min-width: 960px) {
   .amenidades-grid {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  .amenidades-titulo {
-    font-size: 2.5rem;
   }
 }
 
