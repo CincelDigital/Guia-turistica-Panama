@@ -270,6 +270,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ---------- EMERGENCY SECTION ---------- */
+/* Título principal */
+.amenidades-titulo {
+  font-family: 'Playfair Display', serif;  /* Elegante, como los títulos del sitio */
+}
+
 .emergency-section {
   background: var(--c-jungle);
   margin: 0 0 0 0;
