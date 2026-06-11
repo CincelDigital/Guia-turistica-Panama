@@ -12,6 +12,14 @@ const data = {
       { nombre: { es: "Urgencias Médicas (SUME)",en: "Medical Emergencies"   }, numero: "911"      },
       { nombre: { es: "Policía de Turismo",      en: "Tourism Police"        }, numero: "211-0366" },
       { nombre: { es: "Bomberos",                en: "Fire Department"       }, numero: "103"      }
+       amenidades: [
+    { icono: "🏊", nombre: { es: "Piscina",                en: "Swimming Pool"       }, desc: { es: "Disfruta de nuestra piscina al aire libre con vista panorámica.", en: "Enjoy our outdoor pool with panoramic views."             } },
+    { icono: "🔥", nombre: { es: "Zona de BBQ",            en: "BBQ Area"            }, desc: { es: "Área equipada para asados y reuniones al aire libre.",            en: "Fully equipped area for grilling and outdoor gatherings." } },
+    { icono: "📶", nombre: { es: "Wi-Fi de alta velocidad",en: "High-Speed Wi-Fi"    }, desc: { es: "Conexión estable y rápida en todas las áreas del hotel.",          en: "Fast and stable connection throughout the entire hotel."  } },
+    { icono: "🏋️", nombre: { es: "Gimnasio",               en: "Gym"                 }, desc: { es: "Equipos modernos disponibles las 24 horas del día.",              en: "Modern equipment available 24 hours a day."               } },
+    { icono: "💆", nombre: { es: "Spa & Relax",            en: "Spa & Relax"         }, desc: { es: "Masajes y tratamientos para tu bienestar total.",                  en: "Massages and treatments for your total well-being."       } },
+    { icono: "🍽️", nombre: { es: "Restaurante",            en: "Restaurant"          }, desc: { es: "Cocina local e internacional con ingredientes frescos.",           en: "Local and international cuisine with fresh ingredients."  } }
+  ],
     ]
   },
   lugares: [
@@ -153,6 +161,8 @@ const ui = {
   emergTitle:     { es: "Números de Emergencia",   en: "Emergency Numbers"             },
   footer:         { es: "Diseñado para viajeros en Panamá · Información sujeta a cambios",
                     en: "Designed for travelers in Panama · Information subject to change" },
+   amenidadesTitulo:    { es: "Nuestras amenidades",              en: "Our Amenities"                  },
+  amenidadesSubtitulo: { es: "Todo lo que necesitas, en un solo lugar", en: "Everything you need, in one place" },
   langSwitch:     { es: "EN", en: "ES" } // lo que muestra el botón (el idioma al que va a cambiar)
 };
 
@@ -169,6 +179,7 @@ function renderizarInterfaz() {
   renderizarTextosFijos();
   renderizarTarjetas();
   renderizarEmergencias();
+  renderizarAmenidades();
 }
 
 // Actualiza todos los textos estáticos del HTML
@@ -215,6 +226,19 @@ function renderizarTarjetas() {
 
 // Dibuja la lista de emergencias en el idioma activo
 function renderizarEmergencias() {
+   // Actualiza los textos de la sección amenidades
+function renderizarAmenidades() {
+  $('txt-amen-titulo').textContent    = t(ui.amenidadesTitulo);
+  $('txt-amen-subtitulo').textContent = t(ui.amenidadesSubtitulo);
+
+  $('amenidadesGrid').innerHTML = data.amenidades.map(a => `
+    <div class="amenidad-card">
+      <div class="amenidad-icono">${a.icono}</div>
+      <h3 class="amenidad-nombre">${t(a.nombre)}</h3>
+      <p class="amenidad-desc">${t(a.desc)}</p>
+    </div>
+  `).join('');
+}
   const lista = $('emergencyList');
 
   lista.innerHTML = data.emergencias.lista.map(item => `
