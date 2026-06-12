@@ -163,6 +163,8 @@ const ui = {
                     en: "Designed for travelers in Panama · Information subject to change" },
    amenidadesTitulo:    { es: "Nuestras amenidades",                en: "Our Amenities"                       },
 amenidadesSubtitulo: { es: "Todo lo que necesitas, en un solo lugar", en: "Everything you need, in one place" },
+   amenidadesTitulo:    { es: "Nuestras amenidades",                en: "Our Amenities"                       },
+amenidadesSubtitulo: { es: "Todo lo que necesitas, en un solo lugar", en: "Everything you need, in one place" },
   langSwitch:     { es: "EN", en: "ES" } // lo que muestra el botón (el idioma al que va a cambiar)
 };
 
@@ -249,6 +251,7 @@ function renderizarAmenidades() {
       <p class="amenidad-desc">${t(a.desc)}</p>
     </div>
   `).join('');
+}
 }
 // ─── EVENTOS ──────────────────────────────────────────
 
