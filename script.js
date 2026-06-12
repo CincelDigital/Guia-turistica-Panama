@@ -153,6 +153,8 @@ const ui = {
   emergTitle:     { es: "Números de Emergencia",   en: "Emergency Numbers"             },
   footer:         { es: "Diseñado para viajeros en Panamá · Información sujeta a cambios",
                     en: "Designed for travelers in Panama · Information subject to change" },
+   amenidadesTitulo:    { es: "Nuestras amenidades",                en: "Our Amenities"                       },
+amenidadesSubtitulo: { es: "Todo lo que necesitas, en un solo lugar", en: "Everything you need, in one place" },
   langSwitch:     { es: "EN", en: "ES" } // lo que muestra el botón (el idioma al que va a cambiar)
 };
 
