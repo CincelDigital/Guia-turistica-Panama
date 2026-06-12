@@ -179,6 +179,7 @@ function renderizarInterfaz() {
   renderizarTextosFijos();
   renderizarTarjetas();
   renderizarEmergencias();
+  renderizarAmenidades(); // 
 }
 
 // Actualiza todos los textos estáticos del HTML
