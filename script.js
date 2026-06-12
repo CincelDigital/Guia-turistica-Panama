@@ -15,7 +15,7 @@ const data = {
     ]
   },
 amenidades: [
-  { icono: "🏊", nombre: { es: "Piscina",         en: "Swimming Pool" }, desc: { es: "Disfruta de la piscina infinita al aire libre con vista panorámica.", en: "Enjoy the outdoor infinity pool with panoramic views."         } },
+  { icono: "🏊", nombre: { es: "Piscina",         en: "Swimming Pool" }, desc: { es: "Disfruta de la piscina infinita al aire libre con vista panorámica.", en: "Enjoy the outdoor infinity pool with panoramic views."        } },
   { icono: "🍸", nombre: { es: "Bar",              en: "Bar"           }, desc: { es: "Variedad de cocteles, tragos y bebidas.",                             en: "A variety of cocktails, drinks and beverages."               } },
   { icono: "🛒", nombre: { es: "Supermercado",     en: "Supermarket"   }, desc: { es: "Productos frescos y variados para tu despensa.",                      en: "Fresh and varied products for your pantry."                  } },
   { icono: "🏋️", nombre: { es: "Gimnasio",         en: "Gym"           }, desc: { es: "Equipos modernos disponibles para tus entrenamientos.",              en: "Modern equipment available for your workouts."               } },
