@@ -14,13 +14,13 @@ const data = {
       { nombre: { es: "Bomberos",                en: "Fire Department"       }, numero: "103"      }
     ]
   },
-   amenidades: [
-  { icono: "🏊", nombre: { es: "Piscina",                 en: "Swimming Pool"    }, desc: { es: "Disfruta de la piscina infinita al aire libre con vista panorámica.", en: "Enjoy the outdoor infinity pool with panoramic views.             } },
-  { icono: "🍸", nombre: { es: "Bar",             en: "Bar"         }, desc: { es: "Variedad de cocteles, tragos y bebidas.",            en: "Fresh and varied products for your pantry or to prepare your meals." } },
-  { icono: "🛒", nombre: { es: "Supermercado", en: "Supermercado" }, desc: { es: "Productos frescos y variados para tu despensa.",          en: "Fast and stable connection throughout the entire hotel."  } },
-  { icono: "🏋️", nombre: { es: "Gimnasio",                en: "Gym"              }, desc: { es: "Equipos modernos disponibles para tus entrenamientos o preparar tus comidas.",              en: "Modern equipment available for your workouts."               } },
-  { icono: "🎱", nombre: { es: "Sala de juegos",             en: "Sala de juegos"      }, desc: { es: "Entretenimiento para toda la familia.",                  en: "entertainment for the whole family"       } },
-  { icono: "🍽️", nombre: { es: "Restaurantes",             en: "Restaurant"       }, desc: { es: "Cocina local e internacional con ingredientes frescos.",           en: "Local and international cuisine with fresh ingredients."  } }
+amenidades: [
+  { icono: "🏊", nombre: { es: "Piscina",         en: "Swimming Pool" }, desc: { es: "Disfruta de la piscina infinita al aire libre con vista panorámica.", en: "Enjoy the outdoor infinity pool with panoramic views."        } },
+  { icono: "🍸", nombre: { es: "Bar",              en: "Bar"           }, desc: { es: "Variedad de cocteles, tragos y bebidas.",                             en: "A variety of cocktails, drinks and beverages."               } },
+  { icono: "🛒", nombre: { es: "Supermercado",     en: "Supermarket"   }, desc: { es: "Productos frescos y variados para tu despensa.",                      en: "Fresh and varied products for your pantry."                  } },
+  { icono: "🏋️", nombre: { es: "Gimnasio",         en: "Gym"           }, desc: { es: "Equipos modernos disponibles para tus entrenamientos.",              en: "Modern equipment available for your workouts."               } },
+  { icono: "🎱", nombre: { es: "Sala de juegos",   en: "Game Room"     }, desc: { es: "Entretenimiento para toda la familia.",                               en: "Entertainment for the whole family."                        } },
+  { icono: "🍽️", nombre: { es: "Restaurantes",     en: "Restaurants"   }, desc: { es: "Cocina local e internacional con ingredientes frescos.",              en: "Local and international cuisine with fresh ingredients."     } }
 ],
   lugares: [
     {
