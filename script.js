@@ -14,6 +14,14 @@ const data = {
       { nombre: { es: "Bomberos",                en: "Fire Department"       }, numero: "103"      }
     ]
   },
+   amenidades: [
+  { icono: "🏊", nombre: { es: "Piscina",                 en: "Swimming Pool"    }, desc: { es: "Disfruta de nuestra piscina al aire libre con vista panorámica.", en: "Enjoy our outdoor pool with panoramic views."             } },
+  { icono: "🔥", nombre: { es: "Zona de BBQ",             en: "BBQ Area"         }, desc: { es: "Área equipada para asados y reuniones al aire libre.",            en: "Fully equipped area for grilling and outdoor gatherings." } },
+  { icono: "📶", nombre: { es: "Wi-Fi de alta velocidad", en: "High-Speed Wi-Fi" }, desc: { es: "Conexión estable y rápida en todas las áreas del hotel.",          en: "Fast and stable connection throughout the entire hotel."  } },
+  { icono: "🏋️", nombre: { es: "Gimnasio",                en: "Gym"              }, desc: { es: "Equipos modernos disponibles las 24 horas del día.",              en: "Modern equipment available 24 hours a day."               } },
+  { icono: "💆", nombre: { es: "Spa & Relax",             en: "Spa & Relax"      }, desc: { es: "Masajes y tratamientos para tu bienestar total.",                  en: "Massages and treatments for your total well-being."       } },
+  { icono: "🍽️", nombre: { es: "Restaurante",             en: "Restaurant"       }, desc: { es: "Cocina local e internacional con ingredientes frescos.",           en: "Local and international cuisine with fresh ingredients."  } }
+],
   lugares: [
     {
       nombre:   { es: "Panamá la Vieja",               en: "Panama Viejo"                },
