@@ -1,276 +1,531 @@
-/* ===================================================
-   PANAMÁ TOURIST GUIDE — script.js
-   Bilingual (ES/EN) + Region Filter
-   =================================================== */
+/* ============================================================
+   PANAMA TOURISM SITE — script.js
+   Bilingual (ES / EN) with full translation object.
+   Handles: language toggle, tourism cards, amenity cards,
+            emergency cards, filter bar, hamburger menu.
+============================================================ */
 
-// ─── DATA ────────────────────────────────────────────
-const data = {
-  emergencias: {
-    titulo: { es: "Números de Emergencia", en: "Emergency Numbers" },
-    lista: [
-      { nombre: { es: "Policía Nacional",       en: "National Police"        }, numero: "104"      },
-      { nombre: { es: "Urgencias Médicas (SUME)",en: "Medical Emergencies"   }, numero: "911"      },
-      { nombre: { es: "Policía de Turismo",      en: "Tourism Police"        }, numero: "211-0366" },
-      { nombre: { es: "Bomberos",                en: "Fire Department"       }, numero: "103"      }
-       amenidades: [
-    { icono: "🏊", nombre: { es: "Piscina",                en: "Swimming Pool"       }, desc: { es: "Disfruta de nuestra piscina al aire libre con vista panorámica.", en: "Enjoy our outdoor pool with panoramic views."             } },
-    { icono: "🔥", nombre: { es: "Zona de BBQ",            en: "BBQ Area"            }, desc: { es: "Área equipada para asados y reuniones al aire libre.",            en: "Fully equipped area for grilling and outdoor gatherings." } },
-    { icono: "📶", nombre: { es: "Wi-Fi de alta velocidad",en: "High-Speed Wi-Fi"    }, desc: { es: "Conexión estable y rápida en todas las áreas del hotel.",          en: "Fast and stable connection throughout the entire hotel."  } },
-    { icono: "🏋️", nombre: { es: "Gimnasio",               en: "Gym"                 }, desc: { es: "Equipos modernos disponibles las 24 horas del día.",              en: "Modern equipment available 24 hours a day."               } },
-    { icono: "💆", nombre: { es: "Spa & Relax",            en: "Spa & Relax"         }, desc: { es: "Masajes y tratamientos para tu bienestar total.",                  en: "Massages and treatments for your total well-being."       } },
-    { icono: "🍽️", nombre: { es: "Restaurante",            en: "Restaurant"          }, desc: { es: "Cocina local e internacional con ingredientes frescos.",           en: "Local and international cuisine with fresh ingredients."  } }
-  ],
+// ── TRANSLATION OBJECT ──────────────────────────────────────
+const translations = {
+  es: {
+    // Navbar
+    "nav.logo":       "Descubre Panamá",
+    "nav.tourism":    "Turismo",
+    "nav.amenities":  "Amenidades",
+    "nav.emergency":  "Emergencias",
+
+    // Hero
+    "hero.eyebrow":   "Destino Centroamérica",
+    "hero.title":     "La encrucijada del mundo",
+    "hero.subtitle":  "Dos océanos. Una ciudad. Mil historias que descubrir.",
+    "hero.cta":       "Explorar destinos",
+
+    // Tourism section
+    "tourism.eyebrow": "Lugares imperdibles",
+    "tourism.title":   "Sitios de Turismo",
+    "tourism.desc":    "Desde ruinas coloniales hasta archipiélagos vírgenes, Panamá lo tiene todo.",
+
+    // Filter buttons
+    "filter.all":       "Todos",
+    "filter.city":      "Ciudad",
+    "filter.provinces": "Provincias",
+
+    // Amenities section
+    "amenities.eyebrow": "Tu comodidad, primero",
+    "amenities.title":   "Amenidades",
+    "amenities.desc":    "Todo lo que necesitas para una estancia perfecta.",
+
+    // Emergency section
+    "emergency.eyebrow": "Seguridad primero",
+    "emergency.title":   "Números de Emergencia",
+    "emergency.desc":    "Guarda estos números antes de explorar. Tu seguridad es lo más importante.",
+
+    // Footer
+    "footer.copy": "© 2025 Descubre Panamá. Hecho con ❤️ para viajeros curiosos.",
+
+    // Card labels
+    "card.schedule":  "Horario",
+    "card.price":     "Precio",
+    "card.region.ciudad":    "Ciudad de Panamá",
+    "card.region.provincias": "Provincias",
+
+    // Amenities
+    amenities: [
+      { key: "supermarket", name: "Supermercado",    icon: "cart" },
+      { key: "gaming",      name: "Sala de Juegos",  icon: "gamepad" },
+      { key: "bar",         name: "Bar",             icon: "cocktail" },
+      { key: "restaurant",  name: "Restaurantes",    icon: "restaurant" },
+      { key: "pool",        name: "Piscina",          icon: "pool" },
+      { key: "gym",         name: "Gimnasio",         icon: "gym" },
+    ],
+
+    // Emergency numbers
+    emergency: [
+      {
+        icon: "🚔",
+        name: "Policía Nacional",
+        desc: "Para reportar delitos, robos o cualquier situación de inseguridad.",
+        number: "104"
+      },
+      {
+        icon: "🚒",
+        name: "Benemérito Cuerpo de Bomberos",
+        desc: "Incendios, rescates y emergencias de todo tipo.",
+        number: "103"
+      },
+      {
+        icon: "🏖️",
+        name: "Policía de Turismo",
+        desc: "Asistencia especializada para visitantes y turistas en Panamá.",
+        number: "(+507) 211-0366"
+      },
+      {
+        icon: "🏥",
+        name: "SUME — Sistema Único de Manejo de Emergencias",
+        desc: "Número único de emergencias médicas, desastres y coordinación.",
+        number: "911"
+      }
+    ],
+
+    // Tourism places
+    places: [
+      {
+        nombre:  "Panamá la Vieja",
+        region:  "ciudad",
+        precio:  "$17.00",
+        horario: "Martes a Domingo: 8:30 am – 5:30 pm (Taquilla cierra 4:30 pm)",
+        detalles:"Ruinas históricas de la primera ciudad española en el Pacífico.",
+        img:     "imagenes/panama-la-vieja.jpg"
+      },
+      {
+        nombre:  "Biomuseo",
+        region:  "ciudad",
+        precio:  "$20.00",
+        horario: "Mar–Vie: 9:00 am – 3:00 pm | Sáb–Dom: 10:00 am – 3:00 pm",
+        detalles:"Museo de historia natural diseñado por Frank Gehry que explica cómo Panamá cambió el mundo.",
+        img:     "imagenes/biomuseo.jpg"
+      },
+      {
+        nombre:  "Canal de Panamá",
+        region:  "ciudad",
+        precio:  "$17.22",
+        horario: "Lunes a Domingo: 8:00 am – 5:00 pm (Taquilla hasta 3:30 pm)",
+        detalles:"Centro de visitantes de Miraflores para ver el tránsito de los barcos.",
+        img:     "imagenes/canal-de-panama.jpg"
+      },
+      {
+        nombre:  "Parque Natural Metropolitano",
+        region:  "ciudad",
+        precio:  "Adultos: $5.00 | Niños (3-17): $3.00",
+        horario: "Lunes a Domingo: 7:00 am – 4:30 pm",
+        detalles:"Un bosque tropical en plena ciudad, ideal para senderismo y avistamiento de aves.",
+        img:     "imagenes/parque-metropolitano.jpg"
+      },
+      {
+        nombre:  "Calzada de Amador",
+        region:  "ciudad",
+        precio:  "Entrada Gratuita",
+        horario: "Lunes a Domingo: Todo el día",
+        detalles:"Vía marítima que conecta tres islas, perfecta para caminar, andar en bicicleta y ver los barcos.",
+        img:     "imagenes/calzada-de-amador.jpg"
+      },
+      {
+        nombre:  "Cerro Ancón",
+        region:  "ciudad",
+        precio:  "Entrada Gratuita",
+        horario: "Lunes a Domingo: 6:00 am – 6:00 pm",
+        detalles:"El punto más alto de la ciudad con vistas panorámicas espectaculares y naturaleza.",
+        img:     "imagenes/cerro-ancon.webp"
+      },
+      {
+        nombre:  "Casco Antiguo",
+        region:  "ciudad",
+        precio:  "Entrada Gratuita",
+        horario: "Lunes a Domingo: Todo el día",
+        detalles:"Barrio colonial histórico lleno de plazas, iglesias, restaurantes y vida nocturna.",
+        img:     "imagenes/casco-antiguo.webp"
+      },
+      {
+        nombre:  "Mi Pueblito",
+        region:  "ciudad",
+        precio:  "$3.00",
+        horario: "Lunes a Domingo: 8:00 am – 4:00 pm",
+        detalles:"Réplica de pueblos tradicionales panameños: afroantillano, campesino e indígena.",
+        img:     "imagenes/mi-pueblito.webp"
+      },
+      {
+        nombre:  "Parque Nacional Soberanía",
+        region:  "ciudad",
+        precio:  "$5.00",
+        horario: "Lunes a Domingo: 8:00 am – 5:00 pm",
+        detalles:"Hogar del famoso Camino de Cruces y Pipeline Road, ideal para observar naturaleza pura.",
+        img:     "imagenes/parque-soberania.jpg"
+      },
+      {
+        nombre:  "Bocas del Toro",
+        region:  "provincias",
+        precio:  "Ver opciones de tours",
+        horario: "Destino Turístico",
+        detalles:"Archipiélago caribeño famoso por sus playas, surf y biodiversidad marina.",
+        img:     "imagenes/bocas-del-toro.webp"
+      },
+      {
+        nombre:  "Chiriquí",
+        region:  "provincias",
+        precio:  "Ver opciones de tours",
+        horario: "Destino Turístico",
+        detalles:"Tierras altas con el Volcán Barú, Boquete, el café geisha y un clima fresco.",
+        img:     "imagenes/chiriqui.jpg"
+      },
+      {
+        nombre:  "El Valle de Antón",
+        region:  "provincias",
+        precio:  "Ver opciones de tours",
+        horario: "Destino Turístico",
+        detalles:"Un pueblo hermoso ubicado dentro del cráter de un volcán extinto.",
+        img:     "imagenes/el-valle.jpg"
+      },
+      {
+        nombre:  "San Blas",
+        region:  "provincias",
+        precio:  "Ver opciones de tours",
+        horario: "Destino Turístico",
+        detalles:"Islas paradisíacas manejadas por la comunidad indígena Guna Yala.",
+        img:     "imagenes/san-blas.avif"
+      }
     ]
   },
-  lugares: [
-    {
-      nombre:   { es: "Panamá la Vieja",               en: "Panama Viejo"                },
-      region:   "ciudad",
-      precio:   { es: "$17.00",                         en: "$17.00"                      },
-      horario:  { es: "Martes a Domingo: 8:30 am a 5:30 pm (Taquilla hasta 4:30 pm)",
-                  en: "Tuesday to Sunday: 8:30 am to 5:30 pm (Tickets until 4:30 pm)"    },
-      detalles: { es: "Ruinas históricas de la primera ciudad española en el Pacífico.",
-                  en: "Historical ruins of the first Spanish city on the Pacific."        },
-      imagen: "./images/panama-vieja.jpg.jpg"
-    },
-    {
-      nombre:   { es: "Biomuseo",                      en: "Biomuseo"                    },
-      region:   "ciudad",
-      precio:   { es: "$20.00",                         en: "$20.00"                      },
-      horario:  { es: "Mar-Vie: 9:00 am a 3:00 pm | Sáb-Dom: 10:00 am a 3:00 pm",
-                  en: "Tue-Fri: 9:00 am to 3:00 pm | Sat-Sun: 10:00 am to 3:00 pm"      },
-      detalles: { es: "Museo de historia natural diseñado por Frank Gehry.",
-                  en: "Natural history museum designed by Frank Gehry."                   },
-      imagen: "./images/biomuseo.jpg.jpg"
-    },
-    {
-      nombre:   { es: "Canal de Panamá",               en: "Panama Canal"                },
-      region:   "ciudad",
-      precio:   { es: "$17.22",                         en: "$17.22"                      },
-      horario:  { es: "Lunes a Domingo: 8:00 am a 5:00 pm (Taquilla hasta 3:30 pm)",
-                  en: "Monday to Sunday: 8:00 am to 5:00 pm (Tickets until 3:30 pm)"     },
-      detalles: { es: "Centro de visitantes de Miraflores para ver las esclusas.",
-                  en: "Miraflores Visitor Center to watch the locks."                     },
-     imagen: "./images/canal.jpg.jpg"
-    },
-    {
-      nombre:   { es: "Parque Natural Metropolitano",  en: "Metropolitan Natural Park"   },
-      region:   "ciudad",
-      precio:   { es: "Adultos: $5.00 | Niños: $3.00", en: "Adults: $5.00 | Children: $3.00" },
-      horario:  { es: "Lunes a Domingo: 7:00 am a 4:30 pm",
-                  en: "Monday to Sunday: 7:00 am to 4:30 pm"                              },
-      detalles: { es: "Sendero ecológico y naturaleza en plena ciudad.",
-                  en: "Ecological trails and wildlife right in the city."                  },
-      imagen: "./images/parque-metropolitano.jpg.jpg"
-    },
-    {
-      nombre:   { es: "Calzada de Amador",             en: "Amador Causeway"             },
-      region:   "ciudad",
-      precio:   { es: "Entrada Gratuita",               en: "Free Admission"              },
-      horario:  { es: "Lunes a Domingo: Todo el día",   en: "Monday to Sunday: All day"   },
-      detalles: { es: "Calzada marítima perfecta para caminar y ver barcos.",
-                  en: "Marine causeway perfect for walking and ship watching."            },
-     imagen: "./images/calzada-amador.jpg.jpg"
-    },
-    {
-      nombre:   { es: "Cerro Ancón",                   en: "Ancon Hill"                  },
-      region:   "ciudad",
-      precio:   { es: "Entrada Gratuita",               en: "Free Admission"              },
-      horario:  { es: "Lunes a Domingo: 6:00 am a 6:00 pm",
-                  en: "Monday to Sunday: 6:00 am to 6:00 pm"                              },
-      detalles: { es: "El punto más alto de la ciudad con vistas panorámicas.",
-                  en: "The highest point in the city with panoramic views."               },
-      imagen: "./images/cerro-ancon.jpg.webp"
-    },
-    {
-      nombre:   { es: "Casco Antiguo",                 en: "Casco Antiguo"               },
-      region:   "ciudad",
-      precio:   { es: "Entrada Gratuita",               en: "Free Admission"              },
-      horario:  { es: "Lunes a Domingo: Todo el día",   en: "Monday to Sunday: All day"   },
-      detalles: { es: "Barrio colonial histórico lleno de cultura y restaurantes.",
-                  en: "Historic colonial neighborhood full of culture and restaurants."   },
-      imagen: "./images/casco-antiguo.jpg.webp"
-    },
-    {
-      nombre:   { es: "Mi Pueblito",                   en: "Mi Pueblito"                 },
-      region:   "ciudad",
-      precio:   { es: "$3.00",                          en: "$3.00"                       },
-      horario:  { es: "Lunes a Domingo: 8:00 am a 4:00 pm",
-                  en: "Monday to Sunday: 8:00 am to 4:00 pm"                              },
-      detalles: { es: "Réplicas de pueblos tradicionales panameños.",
-                  en: "Replicas of traditional Panamanian villages."                      },
-      imagen: "./images/mi-pueblito.jpg.webp"
-    },
-    {
-      nombre:   { es: "Parque Nacional Soberanía",     en: "Soberania National Park"     },
-      region:   "ciudad",
-      precio:   { es: "$5.00",                          en: "$5.00"                       },
-      horario:  { es: "Lunes a Domingo: 8:00 am a 5:00 pm",
-                  en: "Monday to Sunday: 8:00 am to 5:00 pm"                              },
-      detalles: { es: "Bosque tropical denso ideal para observar aves.",
-                  en: "Dense rainforest ideal for birdwatching."                          },
-     imagen: "./images/parque-soberania.jpg.jpg"
-    },
-    {
-      nombre:   { es: "Bocas del Toro",                en: "Bocas del Toro"              },
-      region:   "provincias",
-      precio:   { es: "Tours disponibles",              en: "Tours available"             },
-      horario:  { es: "Destino Caribeño",               en: "Caribbean Destination"       },
-      detalles: { es: "Archipiélago caribeño famoso por playas cristalinas y vida nocturna.",
-                  en: "Caribbean archipelago famous for crystal clear beaches and nightlife." },
-      imagen: "./images/bocas.jpg.webp"
-    },
-    {
-      nombre:   { es: "Chiriquí",                      en: "Chiriqui"                    },
-      region:   "provincias",
-      precio:   { es: "Tours disponibles",              en: "Tours available"             },
-      horario:  { es: "Tierras Altas",                  en: "Highlands"                   },
-      detalles: { es: "Clima fresco, hogar del majestuoso Volcán Barú y rutas del café.",
-                  en: "Cool weather, home to the majestic Baru Volcano and coffee trails." },
-      imagen: "./images/chiriqui.jpg.jpg"
-    },
-    {
-      nombre:   { es: "El Valle de Antón",             en: "El Valle de Anton"           },
-      region:   "provincias",
-      precio:   { es: "Tours disponibles",              en: "Tours available"             },
-      horario:  { es: "Cráter Volcánico",               en: "Volcanic Crater"             },
-      detalles: { es: "Pueblo pintoresco en un volcán extinto, clima fresco y senderos.",
-                  en: "Picturesque town inside an extinct volcano, cool weather and trails." },
-      imagen: "./images/valle-anton.jpg.jpg"
-    },
-    {
-      nombre:   { es: "San Blas",                      en: "San Blas"                    },
-      region:   "provincias",
-      precio:   { es: "Tours disponibles",              en: "Tours available"             },
-      horario:  { es: "Islas Guna Yala",                en: "Guna Yala Islands"           },
-      detalles: { es: "Islas paradisíacas de arena blanca y aguas turquesas del Caribe.",
-                  en: "Paradisiacal islands with white sand and turquoise Caribbean waters." },
-      imagen: "./images/san-blas.jpg.avif"
-    }
-  ]
-};
 
-// ─── TEXTOS FIJOS DE LA UI ────────────────────────────
-const ui = {
-  eyebrow:        { es: "Guía de Viaje",           en: "Travel Guide"                  },
-  heroSub:        { es: "Descubre lo mejor de",    en: "Discover the best of"          },
-  heroHeading:    { es: "Panamá, puente del Mundo",en: "The Crossroads of the World"   },
-  btnCiudad:      { es: "Ciudad de Panamá",        en: "Panama City"                   },
-  btnProvincias:  { es: "Provincias",              en: "Provinces"                     },
-  emergEyebrow:   { es: "Asistencia",              en: "Assistance"                    },
-  emergTitle:     { es: "Números de Emergencia",   en: "Emergency Numbers"             },
-  footer:         { es: "Diseñado para viajeros en Panamá · Información sujeta a cambios",
-                    en: "Designed for travelers in Panama · Information subject to change" },
-   amenidadesTitulo:    { es: "Nuestras amenidades",              en: "Our Amenities"                  },
-  amenidadesSubtitulo: { es: "Todo lo que necesitas, en un solo lugar", en: "Everything you need, in one place" },
-  langSwitch:     { es: "EN", en: "ES" } // lo que muestra el botón (el idioma al que va a cambiar)
-};
+  // ── ENGLISH ───────────────────────────────────────────────
+  en: {
+    "nav.logo":       "Discover Panama",
+    "nav.tourism":    "Tourism",
+    "nav.amenities":  "Amenities",
+    "nav.emergency":  "Emergency",
 
-// ─── ESTADO GLOBAL ────────────────────────────────────
-let idiomaActual = 'es';
-let regionActual = 'ciudad';
+    "hero.eyebrow":   "Central America's Gem",
+    "hero.title":     "The crossroads of the world",
+    "hero.subtitle":  "Two oceans. One city. A thousand stories to discover.",
+    "hero.cta":       "Explore destinations",
 
-// ─── HELPERS ─────────────────────────────────────────
-const t = (obj) => obj[idiomaActual] ?? obj['es'];
-const $ = (id)  => document.getElementById(id);
+    "tourism.eyebrow": "Must-see places",
+    "tourism.title":   "Tourism Sites",
+    "tourism.desc":    "From colonial ruins to pristine archipelagos, Panama has it all.",
 
-// ─── RENDER PRINCIPAL ─────────────────────────────────
-function renderizarInterfaz() {
-  renderizarTextosFijos();
-  renderizarTarjetas();
-  renderizarEmergencias();
-  renderizarAmenidades();
-}
+    "filter.all":       "All",
+    "filter.city":      "City",
+    "filter.provinces": "Provinces",
 
-// Actualiza todos los textos estáticos del HTML
-function renderizarTextosFijos() {
-  $('txt-eyebrow').textContent       = t(ui.eyebrow);
-  $('txt-hero-sub').textContent      = t(ui.heroSub);
-  $('txt-hero-heading').textContent  = t(ui.heroHeading);
-  $('txt-ciudad').textContent        = t(ui.btnCiudad);
-  $('txt-provincias').textContent    = t(ui.btnProvincias);
-  $('txt-emerg-eyebrow').textContent = t(ui.emergEyebrow);
-  $('txt-emerg-title').textContent   = t(ui.emergTitle);
-  $('txt-footer').textContent        = t(ui.footer);
-  $('langLabel').textContent         = t(ui.langSwitch);
+    "amenities.eyebrow": "Your comfort, first",
+    "amenities.title":   "Amenities",
+    "amenities.desc":    "Everything you need for a perfect stay.",
 
-  // Actualiza lang attribute del <html>
-  document.documentElement.lang = idiomaActual;
-}
+    "emergency.eyebrow": "Safety first",
+    "emergency.title":   "Emergency Numbers",
+    "emergency.desc":    "Save these numbers before you explore. Your safety matters most.",
 
-// Dibuja las tarjetas filtradas por región en el idioma activo
-function renderizarTarjetas() {
-  const grid = $('cardsGrid');
-  const lugaresFiltrados = data.lugares.filter(l => l.region === regionActual);
+    "footer.copy": "© 2025 Discover Panama. Made with ❤️ for curious travelers.",
 
-  if (lugaresFiltrados.length === 0) {
-    grid.innerHTML = `<div class="empty-state"><p>${idiomaActual === 'es' ? 'No hay lugares disponibles.' : 'No places available.'}</p></div>`;
-    return;
+    "card.schedule": "Hours",
+    "card.price":    "Price",
+    "card.region.ciudad":    "Panama City",
+    "card.region.provincias": "Provinces",
+
+    amenities: [
+      { key: "supermarket", name: "Supermarket",  icon: "cart" },
+      { key: "gaming",      name: "Game Room",    icon: "gamepad" },
+      { key: "bar",         name: "Bar",           icon: "cocktail" },
+      { key: "restaurant",  name: "Restaurants",   icon: "restaurant" },
+      { key: "pool",        name: "Pool",           icon: "pool" },
+      { key: "gym",         name: "Gym",            icon: "gym" },
+    ],
+
+    emergency: [
+      {
+        icon: "🚔",
+        name: "National Police",
+        desc: "Report crimes, theft, or any security situation.",
+        number: "104"
+      },
+      {
+        icon: "🚒",
+        name: "Fire Department (Bomberos)",
+        desc: "Fires, rescues, and all types of emergencies.",
+        number: "103"
+      },
+      {
+        icon: "🏖️",
+        name: "Tourism Police",
+        desc: "Specialized assistance for visitors and tourists in Panama.",
+        number: "(+507) 211-0366"
+      },
+      {
+        icon: "🏥",
+        name: "SUME — Emergency Management System",
+        desc: "Unified number for medical emergencies, disasters and coordination.",
+        number: "911"
+      }
+    ],
+
+    places: [
+      {
+        nombre:  "Panama Viejo",
+        region:  "ciudad",
+        precio:  "$17.00",
+        horario: "Tuesday to Sunday: 8:30 am – 5:30 pm (Ticket office closes 4:30 pm)",
+        detalles:"Historic ruins of the first Spanish city on the Pacific coast.",
+        img:     "imagenes/panama-la-vieja.jpg"
+      },
+      {
+        nombre:  "Biomuseum",
+        region:  "ciudad",
+        precio:  "$20.00",
+        horario: "Tue–Fri: 9:00 am – 3:00 pm | Sat–Sun: 10:00 am – 3:00 pm",
+        detalles:"Natural history museum designed by Frank Gehry that explains how Panama changed the world.",
+        img:     "imagenes/biomuseo.jpg"
+      },
+      {
+        nombre:  "Panama Canal",
+        region:  "ciudad",
+        precio:  "$17.22",
+        horario: "Monday to Sunday: 8:00 am – 5:00 pm (Ticket office until 3:30 pm)",
+        detalles:"Miraflores Visitors Center to watch ship transits through the canal.",
+        img:     "imagenes/canal-de-panama.jpg"
+      },
+      {
+        nombre:  "Metropolitan Natural Park",
+        region:  "ciudad",
+        precio:  "Adults: $5.00 | Children (3-17): $3.00",
+        horario: "Monday to Sunday: 7:00 am – 4:30 pm",
+        detalles:"A tropical forest right in the city — ideal for hiking and birdwatching.",
+        img:     "imagenes/parque-metropolitano.jpg"
+      },
+      {
+        nombre:  "Amador Causeway",
+        region:  "ciudad",
+        precio:  "Free Admission",
+        horario: "Monday to Sunday: All day",
+        detalles:"Maritime road connecting three islands, perfect for walking, cycling, and watching ships.",
+        img:     "imagenes/calzada-de-amador.jpg"
+      },
+      {
+        nombre:  "Ancón Hill",
+        region:  "ciudad",
+        precio:  "Free Admission",
+        horario: "Monday to Sunday: 6:00 am – 6:00 pm",
+        detalles:"The city's highest point with spectacular panoramic views and lush nature.",
+        img:     "imagenes/cerro-ancon.jpg"
+      },
+      {
+        nombre:  "Casco Viejo (Old Quarter)",
+        region:  "ciudad",
+        precio:  "Free Admission",
+        horario: "Monday to Sunday: All day",
+        detalles:"Historic colonial neighborhood full of plazas, churches, restaurants, and nightlife.",
+        img:     "imagenes/casco-antiguo.jpg"
+      },
+      {
+        nombre:  "Mi Pueblito",
+        region:  "ciudad",
+        precio:  "$3.00",
+        horario: "Monday to Sunday: 8:00 am – 4:00 pm",
+        detalles:"Replica of traditional Panamanian villages: Afro-Caribbean, peasant, and indigenous.",
+        img:     "imagenes/mi-pueblito.jpg"
+      },
+      {
+        nombre:  "Soberanía National Park",
+        region:  "ciudad",
+        precio:  "$5.00",
+        horario: "Monday to Sunday: 8:00 am – 5:00 pm",
+        detalles:"Home of the famous Camino de Cruces trail and Pipeline Road — pure nature at its best.",
+        img:     "imagenes/parque-soberania.jpg"
+      },
+      {
+        nombre:  "Bocas del Toro",
+        region:  "provincias",
+        precio:  "See tour options",
+        horario: "Tourist Destination",
+        detalles:"Caribbean archipelago famous for its beaches, surfing, and marine biodiversity.",
+        img:     "imagenes/bocas-del-toro.jpg"
+      },
+      {
+        nombre:  "Chiriquí",
+        region:  "provincias",
+        precio:  "See tour options",
+        horario: "Tourist Destination",
+        detalles:"Highlands featuring Barú Volcano, Boquete, geisha coffee, and a cool mountain climate.",
+        img:     "imagenes/chiriqui.jpg"
+      },
+      {
+        nombre:  "El Valle de Antón",
+        region:  "provincias",
+        precio:  "See tour options",
+        horario: "Tourist Destination",
+        detalles:"A charming village nestled inside the crater of an ancient extinct volcano.",
+        img:     "imagenes/el-valle.jpg"
+      },
+      {
+        nombre:  "San Blas",
+        region:  "provincias",
+        precio:  "See tour options",
+        horario: "Tourist Destination",
+        detalles:"Paradise islands managed by the indigenous Guna Yala community.",
+        img:     "imagenes/san-blas.jpg"
+      }
+    ]
   }
+};
 
-  grid.innerHTML = lugaresFiltrados.map(lugar => `
-    <article class="card"
-      style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.75)), url('${lugar.imagen}');"
-      role="img"
-      aria-label="${t(lugar.nombre)}"
-    >
-      <div class="card-body">
-        <span class="card-price">${t(lugar.precio)}</span>
-        <h3 class="card-name">${t(lugar.nombre)}</h3>
-        <p class="card-detail">${t(lugar.detalles)}</p>
-        <p class="card-schedule">${t(lugar.horario)}</p>
-      </div>
-    </article>
-  `).join('');
+// ── SVG ICONS ────────────────────────────────────────────────
+const icons = {
+  cart: `<svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+  gamepad: `<svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="5" ry="5"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1" fill="white"/><circle cx="18" cy="13" r="1" fill="white"/></svg>`,
+  cocktail: `<svg viewBox="0 0 24 24"><path d="m8 22 4-11 4 11"/><path d="M5 3h14L12 13z"/><path d="M5 3a2 2 0 0 0-2 2c0 3 2.5 7 9 7s9-4 9-7a2 2 0 0 0-2-2"/></svg>`,
+  restaurant: `<svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>`,
+  pool: `<svg viewBox="0 0 24 24"><path d="M2 20c1.5-1.5 3-2.5 5-2.5s3.5 1 5 2.5 3.5 2.5 5 2.5"/><circle cx="12" cy="8" r="4"/><path d="M12 2v2M12 14v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
+  gym: `<svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M3 10.5h4v3H3zM17 10.5h4v3h-4zM7 12h10"/></svg>`,
+};
+
+// ── STATE ────────────────────────────────────────────────────
+let currentLang = 'es';
+let currentFilter = 'all';
+
+// ── HELPERS ──────────────────────────────────────────────────
+function t(key) {
+  return translations[currentLang][key] || key;
 }
 
-// Dibuja la lista de emergencias en el idioma activo
-function renderizarEmergencias() {
-   // Actualiza los textos de la sección amenidades
-function renderizarAmenidades() {
-  $('txt-amen-titulo').textContent    = t(ui.amenidadesTitulo);
-  $('txt-amen-subtitulo').textContent = t(ui.amenidadesSubtitulo);
+function isFree(precio) {
+  const lower = precio.toLowerCase();
+  return lower.includes('gratuita') || lower.includes('free');
+}
 
-  $('amenidadesGrid').innerHTML = data.amenidades.map(a => `
-    <div class="amenidad-card">
-      <div class="amenidad-icono">${a.icono}</div>
-      <h3 class="amenidad-nombre">${t(a.nombre)}</h3>
-      <p class="amenidad-desc">${t(a.desc)}</p>
+// ── RENDER TOURISM CARDS ─────────────────────────────────────
+function renderTourismCards() {
+  const grid = document.getElementById('tourismGrid');
+  const places = translations[currentLang].places;
+
+  grid.innerHTML = places.map(place => {
+    const free = isFree(place.precio);
+    const badgeClass = free ? 'card-badge free' : 'card-badge';
+    const badgeText  = free ? (currentLang === 'es' ? 'Gratis' : 'Free') : place.precio;
+    const regionLabel = t(`card.region.${place.region}`);
+    const hidden = (currentFilter !== 'all' && currentFilter !== place.region) ? 'hidden' : '';
+
+    return `
+      <article class="card ${hidden}" data-region="${place.region}">
+        <div class="card-img-wrap">
+          <img src="${place.img}" alt="${place.nombre}" loading="lazy" onerror="this.style.background='#1B5E3B';this.src='';" />
+          <span class="${badgeClass}">${badgeText}</span>
+        </div>
+        <div class="card-body">
+          <span class="card-region">${regionLabel}</span>
+          <h3 class="card-name">${place.nombre}</h3>
+          <p class="card-details">${place.detalles}</p>
+          <div class="card-meta">
+            <div class="card-meta-row">
+              <span class="card-meta-icon">🕐</span>
+              <span>${t('card.schedule')}: ${place.horario}</span>
+            </div>
+            <div class="card-meta-row">
+              <span class="card-meta-icon">💰</span>
+              <span class="card-price">${place.precio}</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+// ── RENDER AMENITY CARDS ─────────────────────────────────────
+function renderAmenities() {
+  const grid = document.getElementById('amenitiesGrid');
+  const list = translations[currentLang].amenities;
+
+  grid.innerHTML = list.map(item => `
+    <div class="amenity-card">
+      <div class="amenity-icon">
+        ${icons[item.icon] || ''}
+      </div>
+      <span class="amenity-name">${item.name}</span>
     </div>
   `).join('');
 }
-  const lista = $('emergencyList');
 
-  lista.innerHTML = data.emergencias.lista.map(item => `
-    <li class="emergency-item">
-      <span class="emergency-name">${t(item.nombre)}</span>
-      <a class="emergency-link" href="tel:${item.numero}" aria-label="Llamar a ${t(item.nombre)}">
-        ${item.numero}
-      </a>
-    </li>
+// ── RENDER EMERGENCY CARDS ───────────────────────────────────
+function renderEmergency() {
+  const grid = document.getElementById('emergencyGrid');
+  const list = translations[currentLang].emergency;
+
+  grid.innerHTML = list.map(item => `
+    <div class="emergency-card">
+      <div class="emergency-icon-wrap">${item.icon}</div>
+      <h3 class="emergency-name">${item.name}</h3>
+      <p class="emergency-desc">${item.desc}</p>
+      <div class="emergency-number">${item.number}</div>
+    </div>
   `).join('');
 }
 
-// ─── EVENTOS ──────────────────────────────────────────
+// ── APPLY STATIC TRANSLATIONS ────────────────────────────────
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (val) el.textContent = val;
+  });
+  document.documentElement.lang = currentLang;
+  document.title = currentLang === 'es' ? 'Descubre Panamá' : 'Discover Panama';
+}
 
-// Toggle de idioma
-$('langToggle').addEventListener('click', () => {
-  idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
-  renderizarInterfaz();
+// ── FULL RENDER ───────────────────────────────────────────────
+function render() {
+  applyTranslations();
+  renderTourismCards();
+  renderAmenities();
+  renderEmergency();
+}
+
+// ── LANGUAGE TOGGLE ──────────────────────────────────────────
+document.getElementById('langToggle').addEventListener('click', () => {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  document.getElementById('langLabel').textContent = currentLang === 'es' ? 'EN' : 'ES';
+  render();
 });
 
-// Filtros de región
+// ── FILTER BAR ───────────────────────────────────────────────
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    regionActual = btn.dataset.region;
-
-    // Actualizar estilo activo
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-
-    renderizarTarjetas();
+    currentFilter = btn.dataset.filter;
+    renderTourismCards();
   });
 });
 
-// ─── INICIO ───────────────────────────────────────────
-renderizarInterfaz();
+// ── HAMBURGER MENU ───────────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const navMobile = document.getElementById('navMobile');
+
+hamburger.addEventListener('click', () => {
+  navMobile.classList.toggle('open');
+});
+
+// Close mobile nav on link click
+navMobile.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navMobile.classList.remove('open'));
+});
+
+// ── NAVBAR SCROLL EFFECT ─────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 60) {
+    navbar.style.background = 'rgba(10, 22, 40, 0.99)';
+  } else {
+    navbar.style.background = 'rgba(10, 22, 40, 0.96)';
+  }
+}, { passive: true });
+
+// ── INIT ─────────────────────────────────────────────────────
+render();
