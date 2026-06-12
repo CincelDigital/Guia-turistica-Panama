@@ -236,7 +236,19 @@ function renderizarEmergencias() {
     </li>
   `).join('');
 }
+// Render amenidades bilingüe
+function renderizarAmenidades() {
+  $('txt-amen-titulo').textContent    = t(ui.amenidadesTitulo);
+  $('txt-amen-subtitulo').textContent = t(ui.amenidadesSubtitulo);
 
+  $('amenidadesGrid').innerHTML = data.amenidades.map(a => `
+    <div class="amenidad-card">
+      <div class="amenidad-icono">${a.icono}</div>
+      <h3 class="amenidad-nombre">${t(a.nombre)}</h3>
+      <p class="amenidad-desc">${t(a.desc)}</p>
+    </div>
+  `).join('');
+}
 // ─── EVENTOS ──────────────────────────────────────────
 
 // Toggle de idioma
