@@ -12,16 +12,16 @@ const data = {
       { nombre: { es: "Urgencias Médicas (SUME)",en: "Medical Emergencies"   }, numero: "911"      },
       { nombre: { es: "Policía de Turismo",      en: "Tourism Police"        }, numero: "211-0366" },
       { nombre: { es: "Bomberos",                en: "Fire Department"       }, numero: "103"      }
+       amenidades: [
+    { icono: "🏊", nombre: { es: "Piscina",                en: "Swimming Pool"       }, desc: { es: "Disfruta de nuestra piscina al aire libre con vista panorámica.", en: "Enjoy our outdoor pool with panoramic views."             } },
+    { icono: "🔥", nombre: { es: "Zona de BBQ",            en: "BBQ Area"            }, desc: { es: "Área equipada para asados y reuniones al aire libre.",            en: "Fully equipped area for grilling and outdoor gatherings." } },
+    { icono: "📶", nombre: { es: "Wi-Fi de alta velocidad",en: "High-Speed Wi-Fi"    }, desc: { es: "Conexión estable y rápida en todas las áreas del hotel.",          en: "Fast and stable connection throughout the entire hotel."  } },
+    { icono: "🏋️", nombre: { es: "Gimnasio",               en: "Gym"                 }, desc: { es: "Equipos modernos disponibles las 24 horas del día.",              en: "Modern equipment available 24 hours a day."               } },
+    { icono: "💆", nombre: { es: "Spa & Relax",            en: "Spa & Relax"         }, desc: { es: "Masajes y tratamientos para tu bienestar total.",                  en: "Massages and treatments for your total well-being."       } },
+    { icono: "🍽️", nombre: { es: "Restaurante",            en: "Restaurant"          }, desc: { es: "Cocina local e internacional con ingredientes frescos.",           en: "Local and international cuisine with fresh ingredients."  } }
+  ],
     ]
   },
-amenidades: [
-  { icono: "🏊", nombre: { es: "Piscina",         en: "Swimming Pool" }, desc: { es: "Disfruta de la piscina infinita al aire libre con vista panorámica.", en: "Enjoy the outdoor infinity pool with panoramic views."        } },
-  { icono: "🍸", nombre: { es: "Bar",              en: "Bar"           }, desc: { es: "Variedad de cocteles, tragos y bebidas.",                             en: "A variety of cocktails, drinks and beverages."               } },
-  { icono: "🛒", nombre: { es: "Supermercado",     en: "Supermarket"   }, desc: { es: "Productos frescos y variados para tu despensa.",                      en: "Fresh and varied products for your pantry."                  } },
-  { icono: "🏋️", nombre: { es: "Gimnasio",         en: "Gym"           }, desc: { es: "Equipos modernos disponibles para tus entrenamientos.",              en: "Modern equipment available for your workouts."               } },
-  { icono: "🎱", nombre: { es: "Sala de juegos",   en: "Game Room"     }, desc: { es: "Entretenimiento para toda la familia.",                               en: "Entertainment for the whole family."                        } },
-  { icono: "🍽️", nombre: { es: "Restaurantes",     en: "Restaurants"   }, desc: { es: "Cocina local e internacional con ingredientes frescos.",              en: "Local and international cuisine with fresh ingredients."     } }
-],
   lugares: [
     {
       nombre:   { es: "Panamá la Vieja",               en: "Panama Viejo"                },
@@ -161,10 +161,8 @@ const ui = {
   emergTitle:     { es: "Números de Emergencia",   en: "Emergency Numbers"             },
   footer:         { es: "Diseñado para viajeros en Panamá · Información sujeta a cambios",
                     en: "Designed for travelers in Panama · Information subject to change" },
-   amenidadesTitulo:    { es: "Nuestras amenidades",                en: "Our Amenities"                       },
-amenidadesSubtitulo: { es: "Todo lo que necesitas, en un solo lugar", en: "Everything you need, in one place" },
-   amenidadesTitulo:    { es: "Nuestras amenidades",                en: "Our Amenities"                       },
-amenidadesSubtitulo: { es: "Todo lo que necesitas, en un solo lugar", en: "Everything you need, in one place" },
+   amenidadesTitulo:    { es: "Nuestras amenidades",              en: "Our Amenities"                  },
+  amenidadesSubtitulo: { es: "Todo lo que necesitas, en un solo lugar", en: "Everything you need, in one place" },
   langSwitch:     { es: "EN", en: "ES" } // lo que muestra el botón (el idioma al que va a cambiar)
 };
 
@@ -182,7 +180,6 @@ function renderizarInterfaz() {
   renderizarTarjetas();
   renderizarEmergencias();
   renderizarAmenidades();
-    renderizarAmenidades(); // 
 }
 
 // Actualiza todos los textos estáticos del HTML
@@ -229,18 +226,7 @@ function renderizarTarjetas() {
 
 // Dibuja la lista de emergencias en el idioma activo
 function renderizarEmergencias() {
-  const lista = $('emergencyList');
-
-  lista.innerHTML = data.emergencias.lista.map(item => `
-    <li class="emergency-item">
-      <span class="emergency-name">${t(item.nombre)}</span>
-      <a class="emergency-link" href="tel:${item.numero}" aria-label="Llamar a ${t(item.nombre)}">
-        ${item.numero}
-      </a>
-    </li>
-  `).join('');
-}
-// Render amenidades bilingüe
+   // Actualiza los textos de la sección amenidades
 function renderizarAmenidades() {
   $('txt-amen-titulo').textContent    = t(ui.amenidadesTitulo);
   $('txt-amen-subtitulo').textContent = t(ui.amenidadesSubtitulo);
@@ -253,7 +239,18 @@ function renderizarAmenidades() {
     </div>
   `).join('');
 }
+  const lista = $('emergencyList');
+
+  lista.innerHTML = data.emergencias.lista.map(item => `
+    <li class="emergency-item">
+      <span class="emergency-name">${t(item.nombre)}</span>
+      <a class="emergency-link" href="tel:${item.numero}" aria-label="Llamar a ${t(item.nombre)}">
+        ${item.numero}
+      </a>
+    </li>
+  `).join('');
 }
+
 // ─── EVENTOS ──────────────────────────────────────────
 
 // Toggle de idioma
