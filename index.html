@@ -3,102 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Descubre Panamá | Discover Panama</title>
+  <title>Guía de Turismo — Panamá</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">
-        <span class="logo-flag">🇵🇦</span>
-        <span class="logo-text" data-i18n="nav.logo">Descubre Panamá</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#tourism" data-i18n="nav.tourism">Turismo</a>
-        <a href="#amenities" data-i18n="nav.amenities">Amenidades</a>
-        <a href="#emergency" data-i18n="nav.emergency">Emergencias</a>
-      </nav>
-      <button class="lang-btn" id="langToggle" aria-label="Toggle language">
-        <span class="lang-icon">🌐</span>
-        <span class="lang-label" id="langLabel">EN</span>
-      </button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="brand-top" data-i18n="nav.brand">Guía de Turismo</span>
+        <span class="brand-main">PANAMÁ</span>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#turismo" data-i18n="nav.tourism">Turismo</a>
+          <a href="#amenidades" data-i18n="nav.amenities">Amenidades</a>
+          <a href="#emergencias" data-i18n="nav.emergency">Emergencias</a>
+        </nav>
+        <button class="lang-btn" id="langToggle">
+          <span>🌐</span>
+          <span id="langLabel">EN</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
     <div class="nav-mobile" id="navMobile">
-      <a href="#tourism" data-i18n="nav.tourism">Turismo</a>
-      <a href="#amenities" data-i18n="nav.amenities">Amenidades</a>
-      <a href="#emergency" data-i18n="nav.emergency">Emergencias</a>
+      <a href="#turismo" data-i18n="nav.tourism">Turismo</a>
+      <a href="#amenidades" data-i18n="nav.amenities">Amenidades</a>
+      <a href="#emergencias" data-i18n="nav.emergency">Emergencias</a>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow" data-i18n="hero.eyebrow">Destino Centroamérica</p>
-      <h1 class="hero-title" data-i18n="hero.title">La encrucijada del mundo</h1>
-      <p class="hero-subtitle" data-i18n="hero.subtitle">Dos océanos. Una ciudad. Mil historias que descubrir.</p>
-      <a href="#tourism" class="hero-cta" data-i18n="hero.cta">Explorar destinos</a>
-    </div>
-    <div class="hero-stripe"></div>
+    <p class="hero-eyebrow" data-i18n="hero.title">Conoce Panamá</p>
+    <h1 class="hero-heading" data-i18n="hero.subtitle">Puente del Mundo</h1>
   </section>
 
-  <!-- SECTION 1: TOURISM -->
-  <section class="section" id="tourism">
-    <div class="section-header">
-      <p class="section-eyebrow" data-i18n="tourism.eyebrow">Lugares imperdibles</p>
-      <h2 class="section-title" data-i18n="tourism.title">Sitios de Turismo</h2>
-      <p class="section-desc" data-i18n="tourism.desc">Desde ruinas coloniales hasta archipiélagos vírgenes, Panamá lo tiene todo.</p>
+  <!-- SECCIÓN 1: TURISMO -->
+  <section class="seccion" id="turismo">
+    <div class="seccion-header">
+      <h2 class="seccion-titulo" data-i18n="tourism.title">Sitios de Turismo</h2>
+      <p class="seccion-desc" data-i18n="tourism.desc">Descubre los destinos más fascinantes de Panamá.</p>
     </div>
-
-    <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all" data-i18n="filter.all">Todos</button>
-      <button class="filter-btn" data-filter="ciudad" data-i18n="filter.city">Ciudad</button>
-      <button class="filter-btn" data-filter="provincias" data-i18n="filter.provinces">Provincias</button>
+    <div class="filtros">
+      <button class="filtro-btn activo" data-filter="all" data-i18n="filter.all">Todos</button>
+      <button class="filtro-btn" data-filter="ciudad" data-i18n="filter.city">Ciudad</button>
+      <button class="filtro-btn" data-filter="provincias" data-i18n="filter.provinces">Provincias</button>
     </div>
-
-    <div class="cards-grid" id="tourismGrid">
-      <!-- Populated by JS -->
-    </div>
+    <div class="cards-grid" id="tourismGrid"></div>
   </section>
 
-  <!-- SECTION 2: AMENITIES -->
-  <section class="section section-dark" id="amenities">
-    <div class="section-header">
-      <p class="section-eyebrow light" data-i18n="amenities.eyebrow">Tu comodidad, primero</p>
-      <h2 class="section-title light" data-i18n="amenities.title">Amenidades</h2>
-      <p class="section-desc light" data-i18n="amenities.desc">Todo lo que necesitas para una estancia perfecta.</p>
+  <!-- SECCIÓN 2: AMENIDADES -->
+  <section class="seccion seccion-tinted" id="amenidades">
+    <div class="seccion-header">
+      <h2 class="seccion-titulo" data-i18n="amenities.title">Amenidades</h2>
+      <p class="seccion-desc" data-i18n="amenities.desc">Todo lo que necesitas para una estadía perfecta.</p>
     </div>
-    <div class="amenities-grid" id="amenitiesGrid">
-      <!-- Populated by JS -->
-    </div>
+    <div class="amenities-grid" id="amenitiesGrid"></div>
   </section>
 
-  <!-- SECTION 3: EMERGENCY -->
-  <section class="section" id="emergency">
-    <div class="section-header">
-      <p class="section-eyebrow" data-i18n="emergency.eyebrow">Seguridad primero</p>
-      <h2 class="section-title" data-i18n="emergency.title">Números de Emergencia</h2>
-      <p class="section-desc" data-i18n="emergency.desc">Guarda estos números antes de explorar. Tu seguridad es lo más importante.</p>
+  <!-- SECCIÓN 3: EMERGENCIAS -->
+  <section class="seccion" id="emergencias">
+    <div class="seccion-header">
+      <h2 class="seccion-titulo" data-i18n="emergency.title">Números de Emergencia</h2>
+      <p class="seccion-desc" data-i18n="emergency.desc">Guarda estos números. Tu seguridad es lo primero.</p>
     </div>
-    <div class="emergency-grid" id="emergencyGrid">
-      <!-- Populated by JS -->
-    </div>
+    <div class="emergency-grid" id="emergencyGrid"></div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-inner">
-      <span class="footer-logo">🇵🇦 Panamá</span>
-      <p class="footer-copy" data-i18n="footer.copy">© 2025 Descubre Panamá. Hecho con ❤️ para viajeros curiosos.</p>
-    </div>
+    <p data-i18n="footer.copy">© 2025 Guía de Turismo Panamá · Información sujeta a cambios</p>
   </footer>
 
   <script src="script.js"></script>
