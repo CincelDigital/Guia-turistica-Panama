@@ -95,7 +95,7 @@ const translations = {
         precio:  "$17.00",
         horario: "Martes a Domingo: 8:30 am – 5:30 pm (Taquilla cierra 4:30 pm)",
         detalles:"Ruinas históricas de la primera ciudad española en el Pacífico.",
-        img:     "imagenes/panama-la-vieja.jpg"
+        img:     "images/panama-la-vieja.jpg"
       },
       {
         nombre:  "Biomuseo",
@@ -103,7 +103,7 @@ const translations = {
         precio:  "$20.00",
         horario: "Mar–Vie: 9:00 am – 3:00 pm | Sáb–Dom: 10:00 am – 3:00 pm",
         detalles:"Museo de historia natural diseñado por Frank Gehry que explica cómo Panamá cambió el mundo.",
-        img:     "imagenes/biomuseo.jpg"
+        img:     "images/biomuseo.jpg"
       },
       {
         nombre:  "Canal de Panamá",
@@ -111,7 +111,7 @@ const translations = {
         precio:  "$17.22",
         horario: "Lunes a Domingo: 8:00 am – 5:00 pm (Taquilla hasta 3:30 pm)",
         detalles:"Centro de visitantes de Miraflores para ver el tránsito de los barcos.",
-        img:     "imagenes/canal-de-panama.jpg"
+        img:     "images/canal-de-panama.jpg"
       },
       {
         nombre:  "Parque Natural Metropolitano",
@@ -119,7 +119,7 @@ const translations = {
         precio:  "Adultos: $5.00 | Niños (3-17): $3.00",
         horario: "Lunes a Domingo: 7:00 am – 4:30 pm",
         detalles:"Un bosque tropical en plena ciudad, ideal para senderismo y avistamiento de aves.",
-        img:     "imagenes/parque-metropolitano.jpg"
+        img:     "images/parque-metropolitano.jpg"
       },
       {
         nombre:  "Calzada de Amador",
@@ -127,7 +127,7 @@ const translations = {
         precio:  "Entrada Gratuita",
         horario: "Lunes a Domingo: Todo el día",
         detalles:"Vía marítima que conecta tres islas, perfecta para caminar, andar en bicicleta y ver los barcos.",
-        img:     "imagenes/calzada-de-amador.jpg"
+        img:     "images/calzada-de-amador.jpg"
       },
       {
         nombre:  "Cerro Ancón",
@@ -135,7 +135,7 @@ const translations = {
         precio:  "Entrada Gratuita",
         horario: "Lunes a Domingo: 6:00 am – 6:00 pm",
         detalles:"El punto más alto de la ciudad con vistas panorámicas espectaculares y naturaleza.",
-        img:     "imagenes/cerro-ancon.webp"
+        img:     "images/cerro-ancon.jpg"
       },
       {
         nombre:  "Casco Antiguo",
@@ -143,7 +143,7 @@ const translations = {
         precio:  "Entrada Gratuita",
         horario: "Lunes a Domingo: Todo el día",
         detalles:"Barrio colonial histórico lleno de plazas, iglesias, restaurantes y vida nocturna.",
-        img:     "imagenes/casco-antiguo.webp"
+        img:     "images/casco-antiguo.jpg"
       },
       {
         nombre:  "Mi Pueblito",
@@ -151,7 +151,7 @@ const translations = {
         precio:  "$3.00",
         horario: "Lunes a Domingo: 8:00 am – 4:00 pm",
         detalles:"Réplica de pueblos tradicionales panameños: afroantillano, campesino e indígena.",
-        img:     "imagenes/mi-pueblito.webp"
+        img:     "images/mi-pueblito.jpg"
       },
       {
         nombre:  "Parque Nacional Soberanía",
@@ -159,7 +159,7 @@ const translations = {
         precio:  "$5.00",
         horario: "Lunes a Domingo: 8:00 am – 5:00 pm",
         detalles:"Hogar del famoso Camino de Cruces y Pipeline Road, ideal para observar naturaleza pura.",
-        img:     "imagenes/parque-soberania.jpg"
+        img:     "images/parque-soberania.jpg"
       },
       {
         nombre:  "Bocas del Toro",
@@ -167,7 +167,7 @@ const translations = {
         precio:  "Ver opciones de tours",
         horario: "Destino Turístico",
         detalles:"Archipiélago caribeño famoso por sus playas, surf y biodiversidad marina.",
-        img:     "imagenes/bocas-del-toro.webp"
+        img:     "images/bocas-del-toro.jpg"
       },
       {
         nombre:  "Chiriquí",
@@ -175,7 +175,7 @@ const translations = {
         precio:  "Ver opciones de tours",
         horario: "Destino Turístico",
         detalles:"Tierras altas con el Volcán Barú, Boquete, el café geisha y un clima fresco.",
-        img:     "imagenes/chiriqui.jpg"
+        img:     "images/chiriqui.jpg"
       },
       {
         nombre:  "El Valle de Antón",
@@ -183,7 +183,7 @@ const translations = {
         precio:  "Ver opciones de tours",
         horario: "Destino Turístico",
         detalles:"Un pueblo hermoso ubicado dentro del cráter de un volcán extinto.",
-        img:     "imagenes/el-valle.jpg"
+        img:     "images/el-valle.jpg"
       },
       {
         nombre:  "San Blas",
@@ -191,7 +191,7 @@ const translations = {
         precio:  "Ver opciones de tours",
         horario: "Destino Turístico",
         detalles:"Islas paradisíacas manejadas por la comunidad indígena Guna Yala.",
-        img:     "imagenes/san-blas.avif"
+        img:     "images/san-blas.jpg"
       }
     ]
   },
@@ -274,7 +274,7 @@ const translations = {
         precio:  "$17.00",
         horario: "Tuesday to Sunday: 8:30 am – 5:30 pm (Ticket office closes 4:30 pm)",
         detalles:"Historic ruins of the first Spanish city on the Pacific coast.",
-        img:     "imagenes/panama-la-vieja.jpg"
+        img:     "images/panama-la-vieja.jpg"
       },
       {
         nombre:  "Biomuseum",
@@ -282,7 +282,7 @@ const translations = {
         precio:  "$20.00",
         horario: "Tue–Fri: 9:00 am – 3:00 pm | Sat–Sun: 10:00 am – 3:00 pm",
         detalles:"Natural history museum designed by Frank Gehry that explains how Panama changed the world.",
-        img:     "imagenes/biomuseo.jpg"
+        img:     "images/biomuseo.jpg"
       },
       {
         nombre:  "Panama Canal",
@@ -290,7 +290,7 @@ const translations = {
         precio:  "$17.22",
         horario: "Monday to Sunday: 8:00 am – 5:00 pm (Ticket office until 3:30 pm)",
         detalles:"Miraflores Visitors Center to watch ship transits through the canal.",
-        img:     "imagenes/canal-de-panama.jpg"
+        img:     "images/canal-de-panama.jpg"
       },
       {
         nombre:  "Metropolitan Natural Park",
@@ -298,7 +298,7 @@ const translations = {
         precio:  "Adults: $5.00 | Children (3-17): $3.00",
         horario: "Monday to Sunday: 7:00 am – 4:30 pm",
         detalles:"A tropical forest right in the city — ideal for hiking and birdwatching.",
-        img:     "imagenes/parque-metropolitano.jpg"
+        img:     "images/parque-metropolitano.jpg"
       },
       {
         nombre:  "Amador Causeway",
@@ -306,7 +306,7 @@ const translations = {
         precio:  "Free Admission",
         horario: "Monday to Sunday: All day",
         detalles:"Maritime road connecting three islands, perfect for walking, cycling, and watching ships.",
-        img:     "imagenes/calzada-de-amador.jpg"
+        img:     "images/calzada-de-amador.jpg"
       },
       {
         nombre:  "Ancón Hill",
@@ -314,7 +314,7 @@ const translations = {
         precio:  "Free Admission",
         horario: "Monday to Sunday: 6:00 am – 6:00 pm",
         detalles:"The city's highest point with spectacular panoramic views and lush nature.",
-        img:     "imagenes/cerro-ancon.jpg"
+        img:     "images/cerro-ancon.jpg"
       },
       {
         nombre:  "Casco Viejo (Old Quarter)",
@@ -322,7 +322,7 @@ const translations = {
         precio:  "Free Admission",
         horario: "Monday to Sunday: All day",
         detalles:"Historic colonial neighborhood full of plazas, churches, restaurants, and nightlife.",
-        img:     "imagenes/casco-antiguo.jpg"
+        img:     "images/casco-antiguo.jpg"
       },
       {
         nombre:  "Mi Pueblito",
@@ -330,7 +330,7 @@ const translations = {
         precio:  "$3.00",
         horario: "Monday to Sunday: 8:00 am – 4:00 pm",
         detalles:"Replica of traditional Panamanian villages: Afro-Caribbean, peasant, and indigenous.",
-        img:     "imagenes/mi-pueblito.jpg"
+        img:     "images/mi-pueblito.jpg"
       },
       {
         nombre:  "Soberanía National Park",
@@ -338,7 +338,7 @@ const translations = {
         precio:  "$5.00",
         horario: "Monday to Sunday: 8:00 am – 5:00 pm",
         detalles:"Home of the famous Camino de Cruces trail and Pipeline Road — pure nature at its best.",
-        img:     "imagenes/parque-soberania.jpg"
+        img:     "images/parque-soberania.jpg"
       },
       {
         nombre:  "Bocas del Toro",
@@ -346,7 +346,7 @@ const translations = {
         precio:  "See tour options",
         horario: "Tourist Destination",
         detalles:"Caribbean archipelago famous for its beaches, surfing, and marine biodiversity.",
-        img:     "imagenes/bocas-del-toro.jpg"
+        img:     "images/bocas-del-toro.jpg"
       },
       {
         nombre:  "Chiriquí",
@@ -354,7 +354,7 @@ const translations = {
         precio:  "See tour options",
         horario: "Tourist Destination",
         detalles:"Highlands featuring Barú Volcano, Boquete, geisha coffee, and a cool mountain climate.",
-        img:     "imagenes/chiriqui.jpg"
+        img:     "images/chiriqui.jpg"
       },
       {
         nombre:  "El Valle de Antón",
@@ -362,7 +362,7 @@ const translations = {
         precio:  "See tour options",
         horario: "Tourist Destination",
         detalles:"A charming village nestled inside the crater of an ancient extinct volcano.",
-        img:     "imagenes/el-valle.jpg"
+        img:     "images/el-valle.jpg"
       },
       {
         nombre:  "San Blas",
@@ -370,7 +370,7 @@ const translations = {
         precio:  "See tour options",
         horario: "Tourist Destination",
         detalles:"Paradise islands managed by the indigenous Guna Yala community.",
-        img:     "imagenes/san-blas.jpg"
+        img:     "images/san-blas.jpg"
       }
     ]
   }
